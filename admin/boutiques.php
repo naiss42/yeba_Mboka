@@ -311,25 +311,49 @@
           </div>
 
           <div class="row">
+                <?php 
+                   include('includes/Config.php');
+                    $ref = "Souscription/";
+                    $fetchdata = $database->getReference($ref)->getValue();              
+                            
+                    $i=0;											
+                    foreach($fetchdata as $row)
+                           {
+                 ?>
+
             <div class="col-lg-3 col-12">
                 <div class="card card-profile overflow-hidden">
                   <div class="row">
                        <div class="card">
-                        <img class="w-100 border-radius-md" src="../assets/img/icon.png" style="max-width: 100%; max-height: 270px;" alt="image">
-                        <div class="card-body">
-                          <h5 class="mb-0">Prada Shop</h5>
-                          <h6 class="text-info"><sub class="bg-dark p-1 rounded text-white shadow-lg">Entreprises</sub> </h6>
-                          <b class="mb-5 text-sm"> [ Le compte expire le 25/02/2021 ] </b>
-                          <a href="commandes.html" class="btn btn-sm bg-jaunefond text-white">Gérer ces posts</a>
-                          <a href="" class="btn btn-sm bg-gradient-danger">Bloquer le compte</a>
-                      </div>
-                       </div>
+                          <img class="w-100 border-radius-md" src="<?php echo $row['imageURL'] ?>" style="max-width: 100%; max-height: 270px;" alt="image">
+                          <div class="card-body">
+                            <h5 class="mb-0"><?php echo $row['designation'] ?></h5>
+                            <h6 class="text-info"><sub class="bg-dark p-1 rounded text-white shadow-lg"><?php echo $row['type'] ?></sub> </h6>
+                            <b class="mb-5 text-sm"> [ Le compte expire le 25/02/2021 ] </b>
+                            <a href="commandes.html" class="btn btn-sm bg-jaunefond text-white">Gérer ces posts</a>
+                            <?php 
+											
+                                  if ($row['isActive']=='false') {
+
+                                    echo"<a href='' class='btn btn-sm bg-gradient-success'>Compte actif</a>";
+                                    
+                                  }
+                                  else {
+
+                                    echo"<a href='' class='btn btn-sm bg-gradient-danger'>Bloquer le compte</a>";
+                                  }
+                              ?>
+                            
+                          </div>
+                        </div>
                   </div>
                 </div>
               </div>
+              <?php
+                 $i++;
+                   } 												
+              ?>
         </div>
-
-
 
     </div>
   </main>
